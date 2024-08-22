@@ -70,7 +70,7 @@ https://api.census.gov/data/key_signup.html
 Paste your key into the space below and run the function `census_api_key`
 
 ```{r}
-census_api_key("YOUR KEY GOES HERE", overwrite = TRUE)
+census_api_key("e79f3706b6d61249968c6ce88794f6f556e5bf3d", overwrite = TRUE)
 ```
 
 # Load Variables
@@ -203,9 +203,11 @@ Prompt: Try it yourself - change the color and the alpha.
 ```{r}
 ggplot()+
   geom_sf(data = acs2020,
-          fill = "black", color = "transparent")+
+          fill = "black", 
+          color = "transparent")+
   geom_sf(data = philly_311,
-          color = "yellow", alpha = 0.2,
+          color = "yellow", 
+          alpha = 0.2,
           size = .5)+
   theme_minimal()
 ```
@@ -235,7 +237,7 @@ We are going to turn our point data into a dataframe - `dplyr` - the data wrangl
 
 ```{r}
 tract_dumping_summary <- points_and_tracts %>%
-  as.data.frame() %>%
+ as.data.frame() %>%
   group_by(GEOID) %>%
   summarize(n = n())
 ```
@@ -252,7 +254,9 @@ acs2020_incidents <- left_join(acs2020, tract_dumping_summary, by = "GEOID")
 
 There are a bunch of NA observations in our joined data. Why?
 
-Remember to be wary of NA data - what do these data represent?
+Remember to be wary of NA data - what do these data represent? 
+
+Think about the process - we "asked" each incident what tract it belongs to, and summarized that result to count the incidents in each tract. Then we did a tabular join, relating that summary `tract_dumping_summary` back to our original tracts. Look at the data objects along the way, using commands like `glimpse` - this will help you figure this out.
 
 We use an `ifelse` statement here - that's known as a "boolean" - remember that from last class?
 
@@ -308,13 +312,13 @@ Get some hydrology data from the `tigris` package to make the map so nice.
 
 Here is how you do this - I am going to be a bit general in how I describe this, so make sure you use the documentation in the R Studio viewer OR do some internet sleuthing to figure out how to make this work. 
 
-Use the `area_water` function from tigris, and request data of the class `sf` for Philadelphia county. This will call the data from the census spatial library of hydro features.
+Use the `area_water` function from tigris, and request data of the class `sf` for Philadelphia county. The abbreviation for the state of Pennsylvania is "PA". This will call the data from the census spatial library of hydro features.
 
 When you have those data, make sure they are projected to 2272 using `st_crs`, if not, st_transform them.
 
 Download the Philly Council districts using `st_read` and be ready to lay those on top.
 
-They are hosted at this URL - philly_311 <- st_read("https://raw.githubusercontent.com/mafichman/cpln_0795/main/data/philly_311.geojson")
+They are hosted at this URL - philly_districts <- st_read("https://raw.githubusercontent.com/mafichman/cpln_0795/main/data/council_dist.geojson")
 
 # Chunks 4 & 5
 
@@ -326,7 +330,7 @@ Change the color ramp if possible
 
 Add council districts on top with the fill set to transparent
 
-Add some annotation - what are your observations regarding the spatial process of these 311 calls?
+Add some annotation (e.g your interpretations and thoughts) - what are your observations regarding the spatial process of these 311 calls?
 
 # Knit the markdown and push it to your Github repo
 
