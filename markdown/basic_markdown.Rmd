@@ -1,6 +1,6 @@
 ---
 title: "My First Markdown"
-author: "Michael"
+author: "Sylvia"
 date: "2024-08-22"
 output: html_document
 ---
