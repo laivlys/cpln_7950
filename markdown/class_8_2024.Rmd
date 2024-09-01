@@ -70,7 +70,7 @@ https://api.census.gov/data/key_signup.html
 Paste your key into the space below and run the function `census_api_key`
 
 ```{r}
-census_api_key("e79f3706b6d61249968c6ce88794f6f556e5bf3d", overwrite = TRUE)
+census_api_key("ef2ce00f6a71edb77bff8d688c81308d4d2f56eb", overwrite = TRUE)
 ```
 
 # Load Variables
